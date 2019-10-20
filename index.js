@@ -1,28 +1,24 @@
 const list = {
-  '0': {
-    value: 0,
-    next: 3
-  },
-  '3': {
-    value: 1,
-    next: 9
-  },
-  '9': {
-    value: 2,
-    next: 15
-  },
-  '15': {
-    value: 3
+  v: 0,
+  next: {
+    v: 1,
+    next: {
+      v: 2,
+      next: {
+        v: 3
+      }
+    }
   }
 };
 
-const reverseList = (list, curr = 0, queue = []) => {
-  const currentElem = list[curr];
-  queue.unshift(currentElem);
-  if (currentElem.next) {
-    return reverseList(list, currentElem.next, queue)
+const reverseList = (node, next = null, newNode = {}) => {
+  newNode.v = node.v;
+  newNode.next = next;
+
+  if (node.next) {
+    return reverseList(node.next, newNode)
   }
-  return queue;
+  return newNode;
 };
 
 console.log(`-------------------------`);
